@@ -6,7 +6,9 @@ console.log(
     '%c This webpack boilerplate has been developed by Tristan Lawrence => https://twitter.com/triscodes',
     'background: lavenderblush; border: 1px solid #000; padding: 4px; padding-top: 10px; padding-bottom: 8px;'
 );
-
+import {
+    TweenMax
+} from "gsap/TweenMax";
 import {
     loaderAnim,
     animaNow,
@@ -51,11 +53,13 @@ const initClickHold = () => {
 
     // Listening for our custom pressHold event
     item.addEventListener('pressHold', doSomething, false);
+
+    window.addEventListener("resize", detectElementsInDOM, false);
+    window.addEventListener("scroll", detectElementsInDOM, false);
 }
 
 
-window.addEventListener("resize", detectElementsInDOM, false);
-window.addEventListener("scroll", detectElementsInDOM, false);
+
 
 
 let last_known_scroll_position = 0;
@@ -75,8 +79,9 @@ window.addEventListener('scroll', function(e) {
     }
 });
 
-
+let position = document.documentElement.scrollTop;
 const init = () => {
+    window.addEventListener("scroll", detectDirection, false);
     initClickHold();
     const global = new TimelineMax();
     global // global Timeline
@@ -87,6 +92,21 @@ const init = () => {
     randomRed();
 }
 
+const detectDirection = () => {
+    let scroll = document.documentElement.scrollTop;
+
+    if (scroll > position) {
+        TweenLite.to('.ns-paragraph__spanInner', 1, {
+            clearProps: 'transitionDelay'
+        });
+    } else {
+        TweenLite.set('.ns-paragraph__spanInner', {
+            transitionDelay: '0s'
+        });
+    }
+
+    position = scroll;
+}
 
 window.addEventListener('load', function() {
 

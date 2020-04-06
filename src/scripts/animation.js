@@ -5,19 +5,29 @@ import {
 export const loaderAnim = () => {
     const firstHead = document.getElementsByClassName('ns-first__head')[0];
     const loader = document.getElementsByClassName('ns-loader')[0];
+    const square = loader.querySelectorAll('.ns-loaderSquare span')[0];
     const firstHeadparagraphSpan = firstHead.getElementsByClassName('ns-paragraph__span');
     const coverTitleWrap = document.getElementsByClassName('ns-cover__btnWrapper')[0];
     const cover = document.getElementsByClassName('ns-cover')[0];
     const first = document.getElementsByClassName('ns-first')[0];
-    const coverTL = new TimelineMax({ ease: Power3.easeIn });
+    const coverTL = new TimelineMax({
+        ease: Power3.easeIn
+    });
     coverTL
+        .to(square, .4, {
+            height: 100
+        }, '+=.3')
+        .to(square, .4, {
+            top: 'auto',
+            bottom: 0,
+            height: 0
+        }, '+=.3')
         .to(cover, .5, {
             height: '100vh'
-        }, '+=1')
+        }, '+=.3')
         .to(loader, .2, {
             alpha: 0,
-            scale: .8
-        }, '-=1')
+        }, '-=.5')
         .set(loader, {
             display: 'none'
         })
@@ -61,8 +71,9 @@ export const firstAniim = () => {
             y: 20,
             alpha: 0
         }, '+=.8')
-        .to(cover, .4, {
-            height: 0
+        .to(cover, .3, {
+            transformOrigin: 'bottom right',
+            rotation: '90deg'
         })
         .to(firstHeadparagraphSpan, .2, {
             transitionDelay: '0s',
@@ -141,7 +152,7 @@ export const animaCursoOnSlide = (e) => {
 }
 
 export const slideMouseEvent = () => {
-    const slide = document.getElementsByClassName('ns-carousel__slide');
+    const slide = document.getElementsByClassName('ns-magicCursor');
     const theCircle = document.getElementsByClassName('ns-cursor')[0];
     let flag = false;
 
@@ -150,22 +161,35 @@ export const slideMouseEvent = () => {
 
         element.addEventListener('mousemove', function() {
             flag = true;
-            TweenLite.to(theCircle, 0.4, { scale: 1, autoAlpha: 1 })
+            TweenLite.to(theCircle, 0.4, {
+                scale: 1,
+                autoAlpha: 1
+            })
             animaCursoOnSlide();
         });
         element.addEventListener('click', function() {
             flag = true;
-            TweenLite.to(theCircle, 0.4, { scale: .5 })
+            TweenLite.to(theCircle, 0.4, {
+                scale: .5
+            })
             animaCursoOnSlide();
         });
         element.addEventListener('mousedown', function() {
             flag = false;
-            TweenLite.to(theCircle, 0.4, { scale: 0.1, autoAlpha: 0 })
+            TweenLite.to(theCircle, 0.4, {
+                scale: 0.1,
+                autoAlpha: 0
+            })
+            animaCursoOnSlide();
         });
         element.addEventListener('mouseout', function() {
             flag = false;
-            TweenLite.to(theCircle, 0.4, { scale: 0.1, autoAlpha: 0 })
-        });
+            TweenLite.to(theCircle, 0.4, {
+                scale: 0.1,
+                autoAlpha: 0
+            })
+            animaCursoOnSlide();
+git fetch        });
     }
 }
 

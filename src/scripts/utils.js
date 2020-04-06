@@ -129,7 +129,9 @@ export const splitWordsInner = () => {
 
 /* Carousel */
 export const initCarousel = () => {
-    const sliderTL = new TimelineMax({ ease: Power3.easeIn });
+    const sliderTL = new TimelineMax({
+        ease: Power3.easeIn
+    });
     const swiper = new Swiper('.swiper-container', {
         slidesPerView: 1,
         spaceBetween: '-5%',

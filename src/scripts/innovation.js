@@ -57,7 +57,9 @@ export const initScrollMagicInnovation = () => {
                 duration: ((window.innerHeight) / 2), // window height - header - sticky anchor
                 triggerHook: 'onLeave',
             })
-            .setPin(panelWrap, { pushFollowers: false })
+            .setPin(panelWrap, {
+                pushFollowers: false
+            })
             .setClassToggle(element, 'ns-innovation__section--inAction')
             //.addIndicators()
             .addTo(controller)

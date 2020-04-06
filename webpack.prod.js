@@ -11,40 +11,40 @@ const OfflinePlugin = require('offline-plugin');
 
 
 module.exports = merge(common, {
-  mode: 'production',
-  devtool: 'source-map',
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        test: /\.js(\?.*)?$/i,
-        parallel: true,
-        sourceMap: true,
-      })
+    mode: 'production',
+    devtool: 'source-map',
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                test: /\.js(\?.*)?$/i,
+                parallel: true,
+                sourceMap: true,
+            })
+        ]
+    },
+    plugins: [
+        new CompressionPlugin({
+            test: /\.(html|css|js)(\?.*)?$/i // only compressed html/css/js, skips compressing sourcemaps etc
+        }),
+        new ImageminPlugin({
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            gifsicle: { // lossless gif compressor
+                optimizationLevel: 9
+            },
+            pngquant: ({ // lossy png compressor, remove for default lossless
+                quality: '75'
+            }),
+            plugins: [imageminMozjpeg({ // lossy jpg compressor, remove for default lossless
+                quality: '75'
+            })]
+        }),
+        new FaviconsWebpackPlugin({
+            logo: './src/images/favicon.png',
+            icons: {
+                twitter: true,
+                windows: true
+            }
+        }),
+        new OfflinePlugin()
     ]
-  },
-  plugins: [
-    new CompressionPlugin({
-      test: /\.(html|css|js)(\?.*)?$/i // only compressed html/css/js, skips compressing sourcemaps etc
-    }),
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      gifsicle: { // lossless gif compressor
-        optimizationLevel: 9
-      },
-      pngquant: ({ // lossy png compressor, remove for default lossless
-        quality: '75'
-      }),
-      plugins: [imageminMozjpeg({ // lossy jpg compressor, remove for default lossless
-        quality: '75'
-      })]
-    }),
-    new FaviconsWebpackPlugin({
-      logo: './src/images/favicon.svg',
-      icons: {
-        twitter: true,
-        windows: true
-      }
-    }),
-    new OfflinePlugin()
-  ]
 });
