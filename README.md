@@ -18,5 +18,5 @@ Dependencies
 $ yarn
 
 # serve with
-$ tarn serve
+$ yarn serve
 ```
