@@ -1,6 +1,6 @@
 ---
-# Single page of creative front-end experiments
-## Project developed by Nicolò Simioni (2018)
+## Front-end playground for creative experiments
+### Project developed by Nicolò Simioni (2018)
 
 This project has been developed starting from the webpack boilerplate developed by Tristan Lawrence => https://twitter.com/triscodes
 
