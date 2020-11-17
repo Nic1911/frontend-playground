@@ -189,7 +189,7 @@ export const slideMouseEvent = () => {
                 autoAlpha: 0
             })
             animaCursoOnSlide();
-        });
+git fetch        });
     }
 }
 
